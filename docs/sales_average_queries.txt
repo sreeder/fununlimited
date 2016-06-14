@@ -1,0 +1,48 @@
+-----------------------------------------------
+DAILY (BY THE HOUR)
+
+SELECT
+	HOUR(FROM_UNIXTIME(inv_completedtime)) AS t_hour,
+	((SUM(inv_cash)+SUM(inv_check)+SUM(inv_charge))/COUNT(*)) AS total
+FROM invoices,invoice_items
+WHERE
+	inv_completed=1 AND
+	inv_invoiceID=ini_invoiceID AND
+	ini_type=23 AND
+	DAYOFWEEK(FROM_UNIXTIME(inv_completedtime))=DAYOFWEEK(NOW()) AND
+	DATE_FORMAT(NOW(),'%c/%e/%Y')!=DATE_FORMAT(FROM_UNIXTIME(inv_completedtime),'%c/%e/%Y')
+GROUP BY ini_invoiceID
+ORDER BY t_hour
+;
+
+add totals for hours and average
+-----------------------------------------------
+MONTHLY (BY THE DAY)
+
+SELECT
+	DAYOFMONTH(FROM_UNIXTIME(inv_completedtime)) AS t_day,
+	((SUM(inv_cash)+SUM(inv_check)+SUM(inv_charge))/COUNT(*)) AS total
+FROM invoices,invoice_items
+WHERE
+	inv_completed=1 AND
+	inv_invoiceID=ini_invoiceID AND
+	ini_type=23 AND
+	DATE_FORMAT(NOW(),'%c/%e/%Y')!=DATE_FORMAT(FROM_UNIXTIME(inv_completedtime),'%c/%e/%Y')
+GROUP BY ini_invoiceID
+ORDER BY t_day
+;
+-----------------------------------------------
+YEARLY (BY THE MONTH)
+
+SELECT
+	MONTH(FROM_UNIXTIME(inv_completedtime)) AS t_month,
+	((SUM(inv_cash)+SUM(inv_check)+SUM(inv_charge))/COUNT(*)) AS total
+FROM invoices,invoice_items
+WHERE
+	inv_completed=1 AND
+	inv_invoiceID=ini_invoiceID AND
+	ini_type=23 AND
+	DATE_FORMAT(NOW(),'%c/%e/%Y')!=DATE_FORMAT(FROM_UNIXTIME(inv_completedtime),'%c/%e/%Y')
+GROUP BY ini_invoiceID
+ORDER BY t_month
+;

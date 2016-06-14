@@ -1,0 +1,198 @@
+ [ TO-DO ]
+ 1 [x] prices change at every view (IE: build invoice, save, open 3 days later - prices
+				have changed - can't rely on prices set at invoice creation)
+ 2 [x] 2 new columns - cash amount, credit amount, (prices without subtractions) as
+				well as total w/subtractions (w/gap between)
+ 3 [x] "customer printout" button w/window that shows items and cash/credit amounts
+ 4 [x] buttons for "All Cash" and "All Credit"
+				[x] pass params to iframe to set all cash/credit
+ 5 [x] show tax on payment screen w/tax percentage config in store setup
+ 6 [x] fix 'onlybiz' customer lookup error
+ 7 [x] custom fields in iteminfo.php
+ 8 [x] fix set_credit (not subtracting)
+ 9 [x] prompt for required info when doing a trade
+10 [x] integrate answers to questions below 1([x]) 2([x] [x])
+11 [x] integrate quantities (additem.php and invoice view javascript)
+				[ ] change_ccn() if neither, update all prices (per-copy discounts change)
+				(IGNORE THIS UNLESS THERE IS A COMPLAINT!!!)
+12 [x] n/a
+13 [x] add "Check" to payment options
+14 [x] no 'base' on printout
+15 [x] include per-copy discounts on printout
+16 [x] Instead of showing box and no box on printout, just show what is selected on the invoice
+17 [x] CashVal/CreditVal isn't base price - it's the print w/discounts (so they can see both cash and credit)
+18 [x] No 'Price' on sale items
+10 [x] Click item on sale and enter percentage discount ("I can give you 20% off the second item...")
+				(column before total with clickable image to change percentage [and <td> is clickable])
+20 [x] Add e-mail to customer add/edit page
+21 [x] "Edit Customer" button
+22 [x] See if there is a website with video game UPC numbers
+23 [x] look up P.O.S. signing hardware
+24 [x] can't reopen/complete/delete(?) invoice if one is currently open
+25 [x] total on bottom of printout
+26 [x] when scanning item, if no picture, alert w/link to upload image
+27 [ ] Inventory movement between stores
+				Store1:
+				Store2:
+				Store1 qty [><=] [X]
+				Store2 qty [><=] [Y]
+				[Search all items]
+
+				>1 from
+				<1 to
+				(defaults)
+
+				[x] Between stores = price*0.7 (-$2 for no box) [each value able to change for each system]
+
+						!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						vvv COMPLETE THESE PARTS vvv
+						!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				[x] Show prices w/discount(s)
+				[x] Adds/subtract to/from inventory when needed
+				[x] Real-time (if destination store takes 1 day to process but items sold, etc)
+				[x] 	when status = items in transit, subtract from on-hand quantities
+						!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						^^^ COMPLETE THESE PARTS ^^^
+						!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+				[x] Total qty, not new or used (NEW+USED)
+				[x] criteria matches NEW+USED; if matches, show it in new AND used tables
+				[x] separate out by platform and new/used
+
+				only wants 1 copy of each - any 2+ items get rid of (put on list)
+
+				1 new, 1 used, 2 total, only show new
+				2 new, 1 used, 3 total, only show new
+				if 2+ used, show used as well
+
+				how to check:
+					find total
+					if 1+ new, show new
+					if 2+ used, show used
+
+28 [x] Select platform, select price source, list all items w/price value (editable - when price lists come in from sources)
+				[x] initial layout
+				[x] on above, button to remove all visible prices
+				[x] new column that shows what the price is at load
+				[x] after entering prices and submitting, show printable list of changed items ('here, go change these items in the store')
+				NOTES:
+					New price is lowest of all sources marked up 25%
+					First show list of changed prices (and show original price) with checkboxes - if checked, change the price. if not, don't change.
+					- default all to checked w/button to uncheck all
+					- Show used price as well in textbox (change if they want)
+					All checked prices come up in the printable list
+29 [x] Customer discounts according to store-specified markers (when $[X.XX] in sales to customer reached, discount [X][percent/dollars] on all sales)
+				[x] Total sales range is configurable (monthly, yearly, etc)
+				[x] %/$ off new, %/$ off used
+				[x] total sales is per-store
+				[x] remove trade total from sale total before calculating if they get discount or not
+30 [x] Per-copy discounts being applied to sale items?
+31 [x] if 0 on hand, subtract 1 from quantity (don't deduct for first copy!)
+32 [x] Item info page (only information - UPC/title box and show info - for quick lookups for customers)
+				[x] Notes box on above page and on item edit page
+				[x] Quick lookup box in header (UPC/title box - straight to item info page)
+				[x] title or upc (where itm_title like '%value%' or itm_upc='value')
+				[x] search results for multiple matches
+				[x] order by release dates
+				[x] popup window - don't change current page (full always = NO)
+33 [ ] Preorders
+				[x] Look up existing items - don't enter information
+				[ ] Look up customer to add (or add customer) - don't enter name
+				[ ] When item added to invoice, see if it is preordered by that customer; if so, subtract the amount they put down from the purchase price
+34 [x] Redo item lookup (like the TireGuru lookup - each field is a function)
+35 [ ] Online store
+				[ ] sales section - all used 2+ (sum(onhand)-numstores > 0) are X% off
+				[ ] integrate cart.inc and invoice.inc (shopping carts are invoices)
+						[ ] move functionality to add item to cart into separate function
+						[ ] support customerIDs of 0 (cron utility to delete 3+ day old 0-customerID invoices)
+						[x] when a customer logs in, either:
+								a) if there are no items in the current cart:
+									1) if a previous cart exists, delete the current and load the latest
+									2) if no previous cart exists, set the customerID of the current cart to the customer's customerID
+								b) if there are items in the current cart, set the customerID of the current cart to the customer's customerID
+				[ ] item searching
+						[x] basic lookup - just pulls up item info (in page header)
+						[ ] advanced lookup
+								[x] limit search/browse to 1000 results - if 1000 results, show 'Search limit to 1000 results. Please narrow your criteria.'
+										[x] remove "LIMIT X,Y" from the query
+								[x] on the 'search by platform' page, perform searches to get the companies/types instead of
+											showing only those in the search results
+								[x] redo search if they change their criteria; don't parse out of the original results
+						[ ] sort results by clicking on column headers
+36 [ ] Add item verification (when anybody but Scott adds an item)
+				[ ] Utility for Scott to verify un-verified items
+37 [ ] Utility to check for duplicate UPCs
+38 [x] Order generation
+				[x] Option to check/show the lowest price (default checked)
+							check lowest price of all sources - if source price not lowest, show 'source price (lowest price)'
+				[x] Checkbox option: "Print 'Or Best Price'"
+							if checked and the price isn't lowest, show 'Or Best Price' either next to price or
+							 below item title
+				[x] Include quick-lookup searches (from the past month)
+				[x] Include wishlist_items entries
+39 [ ] Create utility to verify all relations (IE: itm_company1ID=com_companyID, etc)
+40 [x] Wishlists
+				[x] Redirect back to item selection page after adding a customer
+				[x] Add new/used option
+				[x] List current wishlists
+				[x] Page to list in-stock items
+				[x] Send emails to customers when their item is in stock
+						[x] Page to send email (linked from in-stock list)
+						[x] Auto-send when item becomes in-stock
+								[x] Trade
+								[x] Receive order
+								[x] Returns
+				[x] Check wishlists after sale/trade
+						[x] Sale - delete from wishlist_items where customerID=X and itemID=Y and newused=Z
+						[x] Trade - find items that haven't had an email sent and send the emails
+				[x] When sending item-in-stock email, show a textbox with the email body in it so that the
+							user can alter the body of the email - load a default body into the box
+41 [x] Delete customer
+42 [ ] View invoice details
+43 [ ] Add new/used to trade
+				[ ] update on-hand quantities
+				[ ] fix $wishlist->check_trade_items() to check new/used
+44 [ ] Make sure format of all forms/etc is uniform across site
+				[ ] Show table headers even if there are no results/show one row with "no X found"
+45 [ ] Employees
+				[ ] Employee history
+				[ ] Show correct sale/trade month/YTD values
+46 [ ] Returns
+				[ ] Include date/new/used/etc selections and figure out refund value
+47 [ ] Utility to import credit slips (enter name/address/phone/credit amount)
+				Create customer with minimal info and credit amount
+48 [ ] UPC creation page (/admin/initial/enterupc.php)
+
+!!! v UPDATES AFTER INITIAL RELEASE v !!!
+48 [x] Rounding problem on invoice with cash/credit percentages with decimals on initial add
+49 [ ] iteminfo.php not showing features/ratings
+50 [x] ability to change credit values on invoice
+51 [x] 'Cancel Invoice' button on invoice screen
+52 [x] checkbox on invoice screen to 'close customer after complete' that submits to iframe and sets session variable
+				(trades don't close customer right now)
+53 [x] 'set upc' on additem.php search
+54 [ ] Change 'click here to ...' text links to buttons
+55 [x] Invoice history not pulling correct employee
+56 [x] Note at top of invtradeinfo.php
+57 [ ] custhistory.php - trades - break up into cash/credit with totals
+
+Import gameboy color (gameboy.xls - check column V for 1) and if itm_fet_rel for 'color' exists
+
+!!!!! IMPORTANT !!!!! IMPORTANT !!!!! IMPORTANT !!!!! IMPORTANT !!!!!
+Fix movies (both VHS and DVD) - none of the field values got pulled in!
+- CREATE NEW SCRIPT TO DO THIS!
+- Loop through the spreadsheets again, but figure out what the itemID should be for that line
+- Query the database and find out if the title and the itemID match - if not, die
+- If so, parse out the field values (rating, length, starring, etc) and insert the values into item_field_values
+!!!!! IMPORTANT !!!!! IMPORTANT !!!!! IMPORTANT !!!!! IMPORTANT !!!!!
+
+!!! WHEN ADDING MORE STORES, ENTER DEFAULT QUANTITY LINES FOR *EVERY* ITEM !!!
+
+[PAYMENT PROCESSING]
+TCLink package
+	http://pecl.php.net/package/TCLink (PHP extension)
+	http://trustcommerce.com/tclink.html (API info)
+	http://trustcommerce.com/tclink.php (TCLink payment processing info)
+STORE CC# IN TC DB!!!
+
+WestHost.com for hosting (www.fununlimitedonline.com)

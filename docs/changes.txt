@@ -1,0 +1,730 @@
+--------------------------------------------[ March 24, 2004 ]--------------------------------------------
+
+#ALTER TABLE ccpercs DROP ccp_cash;
+#ALTER TABLE invoice_items CHANGE ini_percentoff FLOAT(4,2) NOT NULL DEFAULT 0.00;
+#ALTER TABLE platforms ADD pla_defaultbox TINYINT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER pla_abbr;
+#ALTER TABLE invoice_items ADD ini_price_manual TINYINT(4) UNSIGNED NOT NULL DEFAULT '0' After ini_credit_perc;
+
+--------------------------------------------[ April 5, 2004 ]--------------------------------------------
+
+#DELETE FROM flags WHERE flg_const IN ('PNEW','PSELL');
+
+--------------------------------------------[ April 7, 2004 ]--------------------------------------------
+
+Added 'New' to condition
+New invoice automatically created after new customer added
+Credit subtracted from sales total (customer info page and customer history page)
+Doubles list reformatted
+Cash/credit values shown in quick item lookup (iteminfo.php)
+
+#ALTER TABLE condition_discounts ADD cod_new varchar(6) NOT NULL DEFAULT '' AFTER cod_storeID;
+#UPDATE condition_discounts SET cod_new='2.00' WHERE cod_platformID=0;
+#INSERT INTO flags VALUES (4,'Condition - New','CNEW');
+
+--------------------------------------------[ April 9, 2004 ]--------------------------------------------
+
+Fixed typing over a 0 in text boxes
+Added checkboxes to invoice to remove items to replace removing them one by one
+Windows that normally maximized themselves on load now maximize when opened (cleaner)
+
+--------------------------------------------[ April 16, 2004 ]--------------------------------------------
+
+Added year to begqty.php
+Added title boundaries to page links on begqty.php (shows the first/last title on that page)
+UPC box floats with you when you scroll on begqty.php
+begqty.php scrolls to the item that matches the UPC/title you entered
+Added 'Quick Item Add - 1 Item' function
+Fixed invoice history showing the wrong employee
+Optimized begqty.php output - filesize nearly 3/5 what it used to be (from around 1.6mb to around 0.9mb)
+
+ASK SCOTT ABOUT MUSIC/TAPE PRICE CHANGES (was it 7.99=4.99?)
+
+--------------------------------------------[ April 28, 2004 ]--------------------------------------------
+
+Added '-1' button to begqty.php
+Clicking '+1' or '-1' beeps the quantity
+Fixed shown cash/credit values in iteminfo.php
+Changed item search to allow words being in any order (IE: 'kart mario' matches Mario Kart)
+After adding a platform, an 'Unknown' type is added
+Changed music cassette prices from 7.99 to 5.99 (http://www.fununlimitedonline.com/admin/test/fixcassetteprices.php)
+^^^^^^^^ RUN ONCE ^^^^^^^^
+
+--------------------------------------------[ April 29, 2004 ]--------------------------------------------
+
+Added ability to select multiple items to add to invoice from search results
+Fixed error when area code not entered when adding customer
+Fixed error when trade condition set to NEW - new quantity now changed instead of used
+Fixed error when saving invoice - trade amount no longer added when saving, just when completing
+Switched 'Cash' and 'Credit' words around in iteminfo.php
+'Quick Item Add - 1 Item' does not prompt "Are you sure?"
+Truncated item titles in doubles list to stop them from wrapping
+Removed '$' from item prices in doubles list
+
+#ALTER TABLE rankings ADD rnk_sales_value float(7,2) NOT NULL DEFAULT '0.00' AFTER rnk_sales;
+#ALTER TABLE rankings ADD rnk_cashtrades_value float(7,2) NOT NULL DEFAULT '0.00' AFTER rnk_cashtrades;
+#ALTER TABLE rankings ADD rnk_credittrades_value float(7,2) NOT NULL DEFAULT '0.00' AFTER rnk_credittrades;
+
+--------------------------------------------[ April 30, 2004 ]--------------------------------------------
+
+Added itm_title_search to items table - value is itm_title value with everything but letters and numbers removed
+- Helps with some item searches due to "oddities" in the way the titles were entered into the initial spreadsheets
+- /admin/test/maketitlesearch.php creates/populates the field
+Fixed javascript error (add() function) in begqty.php
+Fixed error in doubles.php when a price was above $100
+
+--------------------------------------------[ May 13, 2004 ]--------------------------------------------
+
+Added 'Either' option on wishlists
+
+#INSERT INTO flags VALUES (20,'Either','EITHER');
+
+--------------------------------------------[ May 21, 2004 ]--------------------------------------------
+
+Wishlist items are no longer checked when 'Save Invoice' is used
+Created "View Rankings" page - shows all ranked customers and the respective amounts. View by clicking a customer's ranking.
+
+--------------------------------------------[ June 1, 2004 ]--------------------------------------------
+
+Visa selected by default on invoice payment screen
+Created customer list w/clickable letters and 'narrow by' textbox (Utilities->Customer List)
+
+--------------------------------------------[ June 2, 2004 ]--------------------------------------------
+
+Created barebones trade sheet customer info entry (Utilities->Barebones Utilities)
+Added '# of calls' field to wishlists
+
+--------------------------------------------[ June 14, 2004 ]--------------------------------------------
+
+Moved returns to invoice screen (not complete - see below for completion date)
+
+#INSERT INTO flags VALUES (25,'Return','RETURNS');
+#INSERT INTO flags VALUES (0,'Opened/Unopened - Opened','OPENED'),(1,'Opened/Unopened - Unopened','UNOPENED');
+#ALTER TABLE invoice_items ADD ini_opened tinyint(4) unsigned NOT NULL DEFAULT '0' AFTER ini_condition;
+#ALTER TABLE invoice_items ADD ini_return_purchdate varchar(10) NOT NULL DEFAULT '' AFTER ini_opened;
+
+--------------------------------------------[ June 15, 2004 ]--------------------------------------------
+
+Price changes are now tracked; admin page built to list price changes between dates
+
+#DROP TABLE IF EXISTS price_changes;
+#CREATE TABLE price_changes (
+#  pch_itemID mediumint(8) unsigned NOT NULL default '0',
+#  pch_storeID mediumint(8) unsigned NOT NULL default '0',
+#  pch_newused tinyint(4) unsigned NOT NULL default '0',
+#  pch_from float(6,2) unsigned NOT NULL default '0.00',
+#  pch_to float(6,2) unsigned NOT NULL default '0.00',
+#  pch_time int(10) unsigned NOT NULL default '0',
+#  KEY pch_itemID (pch_itemID,pch_time)
+#) TYPE=MyISAM;
+
+--------------------------------------------[ June 16, 2004 ]--------------------------------------------
+
+Added ability for me (Scott Carpenter) to send messages to Fun Unlimited of Logan administrators (used to notify about changes)
+
+--------------------------------------------[ August 16, 2004 ]--------------------------------------------
+
+Invoice items sorted alphabetically
+Fixed sales ranking
+Added "Change UPC" to iteminfo.php
+Added "Add to Wishlist" to iteminfo.php
+Fixed problem with changing an item's UPC to that of a deleted item (it used to not let you)
+Added customer notes to customer info page
+
+#DROP TABLE IF EXISTS customer_notes;
+#CREATE TABLE customer_notes (
+#  cun_noteID mediumint(8) unsigned NOT NULL auto_increment,
+#  cun_customerID mediumint(8) unsigned NOT NULL default '0',
+#  cun_userID mediumint(8) unsigned NOT NULL default '0',
+#  cun_type tinyint(2) unsigned NOT NULL default '0',
+#  cun_note blob NOT NULL,
+#  cun_time int(10) unsigned NOT NULL default '0',
+#  cun_active tinyint(2) unsigned NOT NULL default '1',
+#  PRIMARY KEY (cun_noteID)
+#) TYPE=MyISAM;
+#INSERT INTO flags VALUES (1,'Customer Note Type - Positive','NOTE_POSITIVE'),(2,'Customer Note Type - Neutral','NOTE_NEUTRAL'),(3,'Customer Note Type - Negative','NOTE_NEGATIVE');
+
+--------------------------------------------[ August 20, 2004 ]--------------------------------------------
+
+Reorganized menu/file structure
+Added pricing to Receive Order
+UPC/price can be changed from Receive Order
+
+--------------------------------------------[ August 26, 2004 ]--------------------------------------------
+
+Created whole platform item info - select platform and info fields to show, and all items are shown/editable (a good way to mass-edit a bunch of items)
+-Not all item fields are being shown (YES/no features, custom fields not shown)
+Added new/used inventory value totals by platform to whole platform quantities
+The last-added item on an invoice is now at the top, highlighted
+A lot of 'Please hold while you are redirected' pages removed - you are now redirected without seeing anything (header('Location: ...') redirects)
+-There are still some that need to be removed
+Fixed problem with not being able to remove an item from an invoice if it was the only item
+
+--------------------------------------------[ September 2, 2004 ]--------------------------------------------
+
+#ALTER TABLE invoice_items CHANGE ini_return_purchdate ini_return_purchdate int(10) unsigned NOT NULL default '0';
+#ALTER TABLE invoice_items ADD ini_return_purchprice float(4,2) unsigned NOT NULL default '0.00' AFTER ini_return_purchdate;
+
+--------------------------------------------[ September 6, 2004 ]--------------------------------------------
+
+#ALTER TABLE invoice_items ADD ini_return_charged tinyint(4) unsigned NOT NULL default '0' AFTER ini_return_purchprice;
+#ALTER TABLE stores ADD sto_charge_perc float(3,4) unsigned NOT NULL default '0.00' AFTER sto_areacode;
+#UPDATE stores SET sto_charge_perc=3.5;
+
+Moved returns to invoice
+Added credit card service charge/restocking fee percentage to store setup (for deducting on returns)
+Added new status field to invoice - charged/not charged (returns)
+- deducts credit card service charge/restocking fee percentage from return value
+
+--------------------------------------------[ September 7, 2004 ]--------------------------------------------
+
+If an invoice is currently open, a note is displayed on all non-invoice-related pages
+Clicking '+/-1' on the Whole Platform Quantities page now puts focus back into the upc/title box after clicking
+Added 'Redo Last Search' button for each type on invoice
+
+--------------------------------------------[ September 9, 2004 ]--------------------------------------------
+
+#ALTER TABLE rankings ADD rnk_returns int(6) unsigned NOT NULL default '0';
+#ALTER TABLE rankings ADD rnk_returns_value float(7,2) unsigned NOT NULL default '0.00';
+
+Added returns to rankings
+Customers can now get cash for their returns - normal cash trade in value used
+All ranking lines can be clicked, regardless of whether the customer has a ranking
+'Please hold ...' shows up every time you click something you need to hold on for on the invoice
+
+--------------------------------------------[ September 13, 2004 ]--------------------------------------------
+
+Added ability to select the last-active point-of-sale customer when searching for a customer
+Added list of incomplete/saved carts below point-of-sale customer search
+Returns now use the smallest of the used price or the purchase price as the base when calculating the price
+- if the used price is used, a notice is set as the title of the price cell (view it by hovering the mouse over the cell)
+Returns are now being counted on the trade information screen (the one that says 'Please give the customer their cash/credit before ...')
+
+--------------------------------------------[ September 18, 2004 ]--------------------------------------------
+
+Returns now always use the purchase price (changed from September 13, 2004)
+Added option on price list report to only print in-stock items (also shows new/used quantities if selected)
+Created utility to cancel 7+ day old saved, incomplete invoices. Can only be run by Scott Carpenter.
+
+--------------------------------------------[ September 19, 2004 ]--------------------------------------------
+
+#INSERT INTO flags VALUES (2,'Opened/Unopened - Broken','BROKEN');
+
+Returns now always have at least $1 taken off (if used)
+Added broken to returns (opened/unopened/broken)
+- always gives full value
+
+--------------------------------------------[ September 23, 2004 ]--------------------------------------------
+
+On an invoice, after clicking any of the modifiers (box, new/used, condition, etc) the focus goes back to the UPC/title box
+Added note under returns on the invoice to clarify that the new/used is when the item was purchased, not at the time of the return
+Added new/used column to the returned items lookup results
+Selecting a previous purchase on the returned items lookup now selects the appropriate new/used
+If 1/2 value is used to find the trade price and the condition is poor, 1/2 is applied again
+
+--------------------------------------------[ September 24, 2004 ]--------------------------------------------
+
+#ALTER TABLE requests ADD req_config blob NOT NULL default '' AFTER req_tostoreID;
+#ALTER TABLE requests CHANGE req_timeadded req_timeadded int(10) unsigned NOT NULL default '0';
+#ALTER TABLE request_items ADD rqi_instructions tinyint(2) unsigned NOT NULL default '0' AFTER rqi_box;
+#ALTER TABLE request_items ADD rqi_condition tinyint(2) unsigned NOT NULL default '0' AFTER rqi_instructions;
+#ALTER TABLE request_items DROP rqi_requested;
+
+--------------------------------------------[ September 26, 2004 ]--------------------------------------------
+
+#ALTER TABLE requests ADD req_fromqty_subtracted tinyint(2) unsigned NOT NULL default '0' after req_tostoreID;
+#ALTER TABLE requests ADD req_toqty_added tinyint(2) unsigned NOT NULL default '0' after req_fromqty_subtracted;
+
+Added document size indicator at bottom-right of all pages with load time
+Completely rewrote Store to Store Inventory Movement
+
+--------------------------------------------[ September 27, 2004 ]--------------------------------------------
+
+Added document load time indicator at bottom-right of all pages with load time/size
+
+--------------------------------------------[ October 3, 2004 ]--------------------------------------------
+
+#SOURCE updates.dump
+
+Created auto-update system
+Moved database to central production server
+
+--------------------------------------------[ October 9, 2004 ]--------------------------------------------
+
+Store-to-Store: 'To' store can pick discounts on received items
+If there are 2+ new on-hand, the invoice only subtracts for 1 new
+
+--------------------------------------------[ October 10, 2004 ]--------------------------------------------
+
+15+ day old saved invoices are no longer saved
+Added button on item information to view it's stock status in every store
+'An Invoice is Currently Open' now blinks to keep your attention
+
+--------------------------------------------[ October 12, 2004 ]--------------------------------------------
+
+A new invoice is created when you select a customer
+
+--------------------------------------------[ October 30, 2004 ]--------------------------------------------
+
+Fixed wishlist
+- now it doesn't change the invoice customer
+- it works now!
+
+--------------------------------------------[ November 20, 2004 ]--------------------------------------------
+
+Customer selection for point of sale now has option to open and create invoice or open and go to info
+
+--------------------------------------------[ November 26, 2004 ]--------------------------------------------
+
+#alter table invoice_items add ini_idx int(4) unsigned not null default '0' after ini_trademilestoneup;
+
+The invoice now updates without refreshing the page
+- THIS MAY HAVE BUGS!!! LET SCOTT KNOW IF YOU FIND ANY!!!
+- Known bug: the returns math is incorrect
+- Known bug: the pricing is a bit off due to not cleaning out javascript variables (this will be fixed soon!)
+If you add a customer (rather than select) for the point-of-sale, it is saved as the last customer
+'Broken' returns no longer increase your inventory count
+New prices are no longer set by any of the utilities - they can only be set manually
+
+--------------------------------------------[ November 27, 2004 ]--------------------------------------------
+
+Fixed items with slashes in the titles (and all places that items are entered)
+-RUN /admin/scott_utils/fixslashes.php TO DO THIS!!!
+
+--------------------------------------------[ November 29, 2004 ]--------------------------------------------
+
+Fixed glitch when changing options on invoice items with the new invoice system
+
+--------------------------------------------[ December 23, 2004 ]--------------------------------------------
+
+#INSERT INTO flags VALUES (0,'None','NONE'),(1,'Special occasion - Christmas','CHRISTMAS'),(2,'Special occasion - Birthday','BIRTHDAY');
+#ALTER TABLE invoice_items ADD ini_return_occasion tinyint(4) unsigned NOT NULL DEFAULT '0' AFTER ini_return_charged;
+#ALTER TABLE invoice_items ADD ini_return_occasion_date varchar(10) NOT NULL DEFAULT '' AFTER ini_return_occasion;
+
+Added "Special Occasion" (None/Christmas/Birthday) options to returns on invoice
+
+--------------------------------------------[ December 27, 2004 ]--------------------------------------------
+
+Fixed problem with special occasion always subtracting $1, even if it shouldn't
+Fixed verbage on receive orders page
+Clicking "...to search again..." on receive order now goes to the correct page
+
+!!! TALK TO SCOTT ABOUT FORCED CREDIT COUNTING TOWARD TRADE TOTALS !!!
+
+--------------------------------------------[ December 28, 2004 ]--------------------------------------------
+
+#CREATE TABLE endofyear_platforms (
+#  eyp_platformID mediumint(8) unsigned NOT NULL default '0',
+#  eyp_yearID mediumint(8) unsigned NOT NULL default '0',
+#  eyp_completed tinyint(2) unsigned NOT NULL default '0',
+#  PRIMARY KEY  (eyp_platformID,eyp_yearID)
+#) TYPE=MyISAM;
+#CREATE TABLE endofyear_items (
+#  eyi_itemID mediumint(8) unsigned NOT NULL default '0',
+#  eyi_yearID mediumint(8) unsigned NOT NULL default '0',
+#  eyi_new int(4) unsigned NOT NULL default '0',
+#  eyi_used int(4) unsigned NOT NULL default '0',
+#  PRIMARY KEY  (eyi_itemID,eyi_yearID)
+#) TYPE=MyISAM;
+
+Added End of Year->Item Quantities utility
+
+--------------------------------------------[ January 1, 2005 ]--------------------------------------------
+
+#ALTER TABLE flags ADD UNIQUE (flg_name);
+
+--------------------------------------------[ January 5, 2005 ]--------------------------------------------
+
+Added 'View Previous Requests' to Store to Store Inventory Movement
+Found 5 items from Monica's invoice; SQL in: /docs/Monica's Invoice.txt
+Changed borders around tables to lighter, more aesthetically pleasing color (#999999 instead of #000000)
+
+--------------------------------------------[ January 7, 2005 ]--------------------------------------------
+
+#ALTER TABLE requests ADD req_timecompleted INT( 8 ) UNSIGNED DEFAULT '0' NOT NULL AFTER req_timeadded;
+
+Added 'Date/Time Completed' to printout of previously completed Store to Store Inventory Movement requests
+
+--------------------------------------------[ January 12, 2005 ]--------------------------------------------
+
+Whole Platform Quantities - typing a word with spaces into title for a title without spaces now correctly matches (IE: 'zhad nost' will match 'zhadnost')
+
+--------------------------------------------[ August 1, 2005 ]--------------------------------------------
+
+#alter table customers drop key cus_namephone;
+#alter table customers add cus_locale tinyint(2) unsigned not null default '25' after cus_type;
+#alter table customers add key cus_namephone (cus_fname,cus_lname,cus_phone,cus_active,cus_locale);
+#insert into flags values (14,'Form error - passwords do not match','PASS_NO_MATCH');
+#insert into flags values (15,'Form error - no username/password entered','NO_USERPASS');
+
+--------------------------------------------[ August 6, 2005 ]--------------------------------------------
+
+The output buffer is now re-enabled, using the GZIP handler (page compression)
+- There should now be significant speed increases on all pages
+Also, in areas that it is possible, header('Location: ...') calls are used
+- This cuts down on the number of necessary page loads
+
+--------------------------------------------[ August 7, 2005 ]--------------------------------------------
+
+#drop index itm_title on items;
+#create index itm_title on items (itm_title(10));
+#create index itm_title_search on items (itm_title_search(10));
+#insert into flags values (250,'Item search - maximum results (online store)','MAX_ITEM_SEARCH_RESULTS_STORE');
+#update types set typ_type='Unknown Type' where typ_type='Unknown';
+#update companies set com_name='Unknown Company' where com_name='Unknown';
+#CREATE TABLE synch_settings (
+#  syn_last_synch int(10) unsigned NOT NULL default '0'
+#) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--------------------------------------------[ September 6, 2005 ]--------------------------------------------
+
+#DROP TABLE IF EXISTS credit_card_types;
+#CREATE TABLE credit_card_types (
+#  cct_typeID mediumint(8) unsigned NOT NULL auto_increment,
+#  cct_name varchar(50) NOT NULL default '',
+#  cct_prefixes varchar(50) NOT NULL default '',
+#  cct_lengths varchar(50) NOT NULL default '',
+#  PRIMARY KEY  (cct_typeID)
+#) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+#INSERT INTO credit_card_types VALUES (1,'Visa','4','13|16'),(2,'Mastercard','51|52|53|54|55','16'),(3,'American Express','34|37','15'),(4,'Discover','6011','16');
+#DROP TABLE IF EXISTS credit_cards;
+#CREATE TABLE credit_cards (
+#  crc_cardID mediumint(8) unsigned NOT NULL auto_increment,
+#  crc_customerID mediumint(8) unsigned NOT NULL default '0',
+#  crc_fname varchar(50) NOT NULL default '',
+#  crc_lname varchar(50) NOT NULL default '',
+#  crc_companyname varchar(100) NOT NULL default '',
+#  crc_number varchar(100) NOT NULL default '',
+#  crc_typeID mediumint(8) unsigned NOT NULL default '0',
+#  crc_expmonth char(3) NOT NULL default '',
+#  crc_expyear varchar(4) NOT NULL default '',
+#  crc_address varchar(100) NOT NULL default '',
+#  crc_city varchar(100) NOT NULL default '',
+#  crc_state char(2) NOT NULL default '',
+#  crc_zip varchar(10) NOT NULL default '',
+#  crc_phone varchar(25) NOT NULL default '',
+#  crc_active tinyint(2) NOT NULL default '1',
+#  PRIMARY KEY  (crc_cardID),
+#  KEY crc_name (crc_fname,crc_lname)
+#);
+#insert into flags values
+#	(21,'Credit card - valid','CC_VALID'),
+#	(22,'Credit card - type does not match','CC_BADTYPE'),
+#	(23,'Credit card - bad number','CC_BADNUM'),
+#	(25,'Credit card - insufficient information','CC_MOREINFO')
+#;
+#ALTER TABLE invoices ADD inv_cardID mediumint(8) unsigned NOT NULL default '0' AFTER inv_card_type;
+
+--------------------------------------------[ February 5, 2006 ]--------------------------------------------
+
+Got rid of all <script src="[file].php"> includes; they were screwing things up on refresh
+Fixed setting a percent discount on all sale and setting all to cash or credit
+Optimized some of the database tables
+Fixed image uploading and assigning to an item
+Item thumbnails now show on the invoice
+Added ini_invoiceitemID field to the invoice_items table
+- This sped up the invoice CONSIDERABLY (along the lines of 12 seconds to 0.9 seconds!)
+
+#ALTER TABLE invoice_items ADD KEY (ini_title(5));
+#ALTER TABLE invoice_items ADD ini_invoiceitemID mediumint(8) unsigned NOT NULL auto_increment PRIMARY KEY FIRST;
+
+--------------------------------------------[ April 4, 2006 ]--------------------------------------------
+
+#DROP TABLE IF EXISTS rankings;
+#CREATE TABLE rankings (
+#  rnk_customerID mediumint(8) unsigned NOT NULL default '0',
+#  rnk_storeID mediumint(8) unsigned NOT NULL default '0',
+#
+#  rnk_sales int(6) unsigned NOT NULL default '0',
+#  rnk_sales_value float(7,2) NOT NULL default '0.00',
+#  rnk_cashtrades int(6) unsigned NOT NULL default '0',
+#  rnk_cashtrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_credittrades int(6) unsigned NOT NULL default '0',
+#  rnk_credittrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_returns int(6) unsigned NOT NULL default '0',
+#  rnk_returns_value float(7,2) unsigned NOT NULL default '0.00',
+#
+#  rnk_ytd_sales int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_sales_value float(7,2) NOT NULL default '0.00',
+#  rnk_ytd_cashtrades int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_cashtrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_ytd_credittrades int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_credittrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_ytd_returns int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_returns_value float(7,2) unsigned NOT NULL default '0.00',
+#
+#  UNIQUE KEY rnk_customerID (rnk_customerID,rnk_storeID)
+#);
+
+RUN QUERY AND FORCE A RANKINGS UPDATE!!!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! CHANGE GARBAGE COLLECTION IN PHP.INI!!! (1440 seconds to 86400) !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Fixed Reports->Best Selling Items
+Broke the customer rankings into pages
+YTD is now calculated with rankings, and shows up on all applicable pages
+- Top 500, customer rankings, customer info, after closing a customer, etc
+When editing a customer's info, you can now click to save and view invoice or save and view info
+Added options on Reports->Changed Prices List for platform and whether or not to show ALL changes or just the last
+Added 'Edit Item Information' button on the item info page
+Uploading/selecting images is a ton easier now (the screen flow is a lot more intuitive)
+
+--------------------------------------------[ April 28, 2006 ]--------------------------------------------
+
+#DROP TABLE IF EXISTS rankings;
+#CREATE TABLE rankings (
+#  rnk_customerID mediumint(8) unsigned NOT NULL default '0',
+#  rnk_storeID mediumint(8) unsigned NOT NULL default '0',
+#
+#  rnk_sales int(6) unsigned NOT NULL default '0',
+#  rnk_sales_value float(7,2) NOT NULL default '0.00',
+#  rnk_cashtrades int(6) unsigned NOT NULL default '0',
+#  rnk_cashtrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_credittrades int(6) unsigned NOT NULL default '0',
+#  rnk_credittrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_returns int(6) unsigned NOT NULL default '0',
+#  rnk_returns_value float(7,2) unsigned NOT NULL default '0.00',
+#
+#  rnk_ytd_sales int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_sales_value float(7,2) NOT NULL default '0.00',
+#  rnk_ytd_cashtrades int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_cashtrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_ytd_credittrades int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_credittrades_value float(7,2) NOT NULL default '0.00',
+#  rnk_ytd_returns int(6) unsigned NOT NULL default '0',
+#  rnk_ytd_returns_value float(7,2) unsigned NOT NULL default '0.00',
+#
+#  rnk_archived smallint(4) unsigned NOT NULL default '0',
+#
+#  UNIQUE KEY rnk_customerID (rnk_customerID,rnk_storeID,rnk_archived)
+#);
+
+YTD is now archived for each previous year (2004 and 2005)
+- Edit and run /admin/archive_rankings.php to archive a year
+- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- !!! RUN THIS FOR 2004 AND 2005 !!!
+- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--------------------------------------------[ August 19, 2006 ]--------------------------------------------
+
+#insert into flags values (60,'Maximum item title length to show on invoices','MAX_TITLE');
+#alter table invoices add inv_cash_out float(6,2) unsigned NOT NULL default '0' after inv_cash;
+#alter table box_discounts add bod_percent tinyint(1) unsigned NOT NULL default '0';
+#alter table condition_discounts add cod_percent tinyint(1) unsigned NOT NULL default '0';
+#alter table percopy_discounts add pcd_percent tinyint(1) unsigned NOT NULL default '0';
+
+See .pdf to-do list for a list of all things that have changed
+
+DOWNLOAD/INSTALL/CONFIGURE/TEST POSTCAST SMTP SERVER!
+- http://www.postcastserver.com/download/release.aspx?p=3
+
+--------------------------------------------[ September 17, 2006 ]--------------------------------------------
+
+#alter table box_discounts add key bod_platformID2 (bod_platformID);
+#alter table ccpercs add key ccp_platformID2 (ccp_platformID);
+#alter table companies add key com_platformID (com_platformID);
+#alter table condition_discounts add key cod_platformID2 (cod_platformID);
+#alter table customer_notes add key cun_customerID (cun_customerID);
+#alter table customers add key cus_storeID (cus_storeID);
+#alter table employees add key emp_storeID (emp_storeID);
+#alter table endofyear_platforms add key eyp_yearID (eyp_yearID);
+#alter table features add key fet_platformID (fet_platformID);
+#alter table invoices add key inv_customerID (inv_customerID);
+#alter table invoices add key inv_storeID (inv_storeID);
+#alter table invoices add key inv_employeeID (inv_employeeID);
+
+#alter table invoice_items add key ini_itemID (ini_itemID);
+#alter table invoice_items add key ini_invoiceID (ini_invoiceID);
+#alter table invoice_items add key ini_platformID (ini_platformID);
+#alter table items add key itm_platformID (itm_platformID);
+#alter table items add key itm_yearID (itm_yearID);
+#alter table items add key itm_company1ID (itm_company1ID);
+#alter table items add key itm_typeID (itm_typeID);
+#alter table item_field_values add key ifv_itemID2 (ifv_itemID);
+#alter table item_field_values add key ifv_fieldID (ifv_fieldID);
+
+#alter table item_fields add key itf_platformID (itf_platformID);
+#alter table item_images add key iti_platformID (iti_platformID);
+#alter table item_source_values add key isv_itemID2 (isv_itemID);
+#alter table item_source_values add key isv_sourceID (isv_sourceID);
+#alter table itm_fet_rel add key ifr_itemID2 (ifr_itemID);
+#alter table itm_fet_rel add key ifr_featureID (ifr_featureID);
+#alter table max_copies add key mac_platformID2 (mac_platformID);
+#alter table max_copies add key mac_storeID (mac_storeID);
+#alter table milestones add key mil_storeID (mil_storeID);
+#alter table min_prices add key mnp_platformID2 (mnp_platformID);
+
+#alter table min_prices add key mnp_storeID (mnp_storeID);
+#alter table order_items add key ori_orderID2 (ori_orderID);
+#alter table order_items add key ori_itemID (ori_itemID);
+#alter table orders add key ord_storeID (ord_storeID);
+#alter table percopy_discounts add key pcd_platformID2 (pcd_platformID);
+#alter table percopy_discounts add key pcd_storeID (pcd_storeID);
+#alter table preorder_customers add key prc_preorderID (prc_preorderID);
+#alter table preorders add key pre_storeID (pre_storeID);
+#alter table preorders add key pre_itemID (pre_itemID);
+#alter table price_changes add key pch_itemID2 (pch_itemID);
+#alter table price_changes add key pch_storeID (pch_storeID);
+
+#alter table quantity add key qty_storeID (qty_storeID);
+#alter table quick_lookups add key qck_itemID2 (qck_itemID);
+#alter table quick_lookups add key qck_storeID (qck_storeID);
+#alter table rankings add key rnk_customerID2 (rnk_customerID);
+#alter table rankings add key rnk_storeID (rnk_storeID);
+#alter table rankings add key rnk_archived (rnk_archived);
+#alter table received_order_items add key roi_itemID (roi_itemID);
+#alter table received_orders add key ror_storeID (ror_storeID);
+#alter table request_items add key rqi_itemID2 (rqi_itemID);
+#alter table request_items add key rqi_requestID (rqi_requestID);
+#alter table request_items add key rqi_platformID (rqi_platformID);
+#alter table request_items add key rqi_newused (rqi_newused);
+
+#alter table request_platform_options add key rpo_requestID2 (rpo_requestID);
+#alter table request_platform_options add key rpo_platformID (rpo_platformID);
+#alter table requests add key req_fromstoreID (req_fromstoreID);
+#alter table requests add key req_tostoreID (req_tostoreID);
+#alter table return add key ret_storeID (ret_storeID);
+#alter table return add key ret_customerID (ret_customerID);
+#alter table return_items add key rti_returnID2 (rti_returnID);
+#alter table return_items add key rti_itemID (rti_itemID);
+
+#alter table return_items add key rti_title (rti_title);
+#alter table sources add key sor_platformID (sor_platformID);
+#alter table types add key typ_platformID (typ_platformID);
+#alter table updates add key upd_updateID (upd_updateID);
+#alter table wishlist_items add key wli_itemID2 (wli_itemID);
+#alter table wishlist_items add key wli_wishlistID (wli_wishlistID);
+#alter table wishlists add key wsh_storeID (wsh_storeID);
+#alter table wishlists add key wsh_customerID (wsh_customerID);
+#drop table year;
+
+# query cache
+#set global query_cache_size=(1024 * 1024 * 100);
+#set global query_cache_limit=(1024 * 1024 * 5);
+
+# tweak settings
+#set global sort_buffer_size=(1024 * 1024 * 16);
+#set global read_buffer_size=(1024 * 1024 * 2);
+#set global read_rnd_buffer_size=(1024 * 1024 * 2);
+
+# change float/decimal table sizes
+#alter table customers change cus_creditamount cus_creditamount decimal(10,2) default '0.00';
+#alter table invoice_items change ini_return_purchprice ini_return_purchprice decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoice_items change ini_price_new ini_price_new decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoice_items change ini_price_used ini_price_used decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoice_items change ini_price ini_price decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoice_items change ini_percentoff ini_percentoff decimal(10,2) NOT NULL default '0.00';
+
+#alter table invoices change inv_tax inv_tax decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoices change inv_additional inv_additional decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoices change inv_cash       inv_cash       decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoices change inv_cash_out   inv_cash_out   decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoices change inv_credit     inv_credit     decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoices change inv_check      inv_check      decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table invoices change inv_charge     inv_charge     decimal(10,2) unsigned NOT NULL default '0.00';
+
+#alter table item_source_values change isv_value isv_value decimal(10,2) NOT NULL default '0.00';
+#alter table milestones change mil_saleamount     mil_saleamount     decimal(10,2) NOT NULL default '0.00';
+#alter table milestones change mil_salediscamount mil_salediscamount decimal(10,2) NOT NULL default '0.00';
+#alter table milestones change mil_tradeupamount  mil_tradeupamount  decimal(10,2) NOT NULL default '0.00';
+#alter table order_items change ori_price ori_price decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table preorder_customers change prc_amountdown prc_amountdown decimal(10,2) NOT NULL default '0.00';
+#alter table preorders change pre_price pre_price decimal(10,2) NOT NULL default '0.00';
+#alter table price_changes change pch_from pch_from decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table price_changes change pch_to pch_to decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table prices change prc_new prc_new decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table prices change prc_used prc_used decimal(10,2) unsigned NOT NULL default '0.00';
+
+#alter table rankings change rnk_sales_value            rnk_sales_value            decimal(10,2) NOT NULL default '0.00';
+#alter table rankings change rnk_cashtrades_value       rnk_cashtrades_value       decimal(10,2) NOT NULL default '0.00';
+#alter table rankings change rnk_credittrades_value     rnk_credittrades_value     decimal(10,2) NOT NULL default '0.00';
+#alter table rankings change rnk_returns_value          rnk_returns_value          decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table rankings change rnk_ytd_sales_value        rnk_ytd_sales_value        decimal(10,2) NOT NULL default '0.00';
+#alter table rankings change rnk_ytd_cashtrades_value   rnk_ytd_cashtrades_value   decimal(10,2) NOT NULL default '0.00';
+#alter table rankings change rnk_ytd_credittrades_value rnk_ytd_credittrades_value decimal(10,2) NOT NULL default '0.00';
+#alter table rankings change rnk_ytd_returns_value      rnk_ytd_returns_value      decimal(10,2) unsigned NOT NULL default '0.00';
+
+#alter table received_order_items change roi_price_new roi_price_new decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table received_order_items change roi_price_used roi_price_used decimal(10,2) unsigned NOT NULL default '0.00';
+#alter table request_items change rqi_price rqi_price decimal(10,2) NOT NULL default '-1.00';
+#alter table request_platform_options change rpo_noboxdiscount rpo_noboxdiscount decimal(10,2) NOT NULL default '0.00';
+#alter table stores change sto_taxperc sto_taxperc decimal(10,5) unsigned NOT NULL default '0.00000';
+#alter table stores change sto_charge_perc sto_charge_perc decimal(10,4) unsigned NOT NULL default '0.0000';
+
+-------------------------------------------------------
+
+UPC searches are now wildcarded - IE: "978089821" matches anything begins with 978089821
+
+--------------------------------------------[ March 3, 2007 ]--------------------------------------------
+
+#insert into flags values (33,'Received Items','RECEIVED');
+
+--------------------------------------------[ April 22, 2007 ]--------------------------------------------
+
+#alter table items change itm_imgID itm_box_imgID mediumint unsigned not null default '0';
+#alter table items add itm_nobox_imgID mediumint unsigned not null default '0' after itm_box_imgID;
+
+[x] 4) Could you do a report that shows the highest trading, buying and selling customers based on selectable age increments (& or by gender)?
+[x] - Different images for box/no box
+
+Updated on April 24, 2007
+
+--------------------------------------------[ April 24, 2007 ]--------------------------------------------
+
+Quick add - pressing backspace on the dropdowns is ignored (requested by employee)
+Quick add - added sale/trade options (box, condition, etc) for +Invoice items
+Added Reports->Summary Report
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! MAKE SURE THAT THE QUERY CACHE IS TURNED ON !!!
+!!! MAKE SURE THAT THE QUERY CACHE IS TURNED ON !!!
+!!! MAKE SURE THAT THE QUERY CACHE IS TURNED ON !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--------------------------------------------[ October 5, 2012 ]--------------------------------------------
+
+alter table customers add cus_idstate char(2) not null default '' after cus_idexpiration;
+alter table invoice_items add ini_serial_number varchar(100) not null default '' after ini_company2_name;
+alter table invoice_items add key ini_serial_number (ini_serial_number);
+
+/admin/reports/pawn_download.php
+/admin/reports/pawn_download_generate.php
+/admin/utilities/serial_number_history.php
+/classes/admin_page.inc
+/classes/customers.inc
+/classes/functions.inc
+/classes/invoice_search.inc
+/classes/invoice_view.inc
+/classes/page.inc
+/docs/changes.txt
+/include/include.inc
+/images/invoice/serial-num.gif
+/images/invoice/template.psd
+/scripts/invoice.js
+/scripts/invoice_dynamic.js
+/scripts/invoice_layers.js
+/scripts/navmenu.js
+
+--------------------------------------------[ October 8, 2012 ]--------------------------------------------
+
+update customers set cus_dob=replace(cus_dob, '-', '/');
+update customers set cus_dob=replace(cus_dob, '\\', '/');
+update customers set cus_dob=replace(cus_dob, ' ', '/');
+update customers set cus_dob='' where cus_dob like '%13' or cus_dob like '%15';
+update customers set cus_dob='' where cus_dob not like '%/%/%';
+update customers set cus_dob='' where cus_dob like '%/%/___';
+update customers set cus_dob='' where cus_dob like '%/___/%';
+update customers set cus_dob='' where cus_dob like '___/%/%';
+update customers set cus_dob='' where cus_dob like '%e%';
+update customers set cus_dob='' where cus_dob like '%//%';
+update customers set cus_dob='' where cus_dob='//';
+
+/admin/pos/invtradeinfo.php
+/admin/reports/pawn_download_generate.php
+/admin/scott_utils/fix_pawn_values.php
+/classes/customers.inc
+/docs/changes.txt
+/scripts/functions.js
+
+Run fix_pawn_values.php and fix everything until nothing else comes up

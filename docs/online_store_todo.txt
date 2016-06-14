@@ -1,0 +1,6 @@
+[ ONLINE STORE TO-DO ]
+[ ] Rewrite the results to use only catalog.php with passed criteria
+[ ] Shopping cart
+[ ] Check out
+[ ] Credit card processing
+[ ] Integrate auto-update onto store computer

@@ -1,0 +1,108 @@
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=1 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3465 |             94 | Daniel    | Digerness |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=2 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3466 |           1230 | Nick      | Cottle    |
+|          3467 |             18 | andrew    | vanover   |
+|          3468 |           2239 | Barbara   | Hales     |
+|          3469 |           1642 | Erika     | Frescura  |
+|          3470 |             49 | Brad      | Croshaw   |
+|          3471 |           2240 | Amanda    | Woytko    |
+|          7388 |             56 | Scot      | Stacey    |
+|          7389 |           3966 | Barbara   | Stacey    |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=3 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3472 |           2241 | Andrew    | Heaton    |
+|          3473 |           2242 | kevin     | brown     |
+|          3474 |           2243 | Tyrell    | Aaron     |
+|          3475 |           2244 | Linda     | Dursteler |
+|          3476 |           2245 | Cristian  | Marquez   |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=4 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3478 |           2246 | Riley     | Anderson  |
+|          3479 |           2246 | Riley     | Anderson  |
+|          3480 |           1230 | Nick      | Cottle    |
+|          3481 |           2247 | Daren     | Bowcutt   |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=5 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3482 |           2248 | Robert    | Linton    |
+|          3483 |           2249 | Julie     | Buxton    |
+|          3484 |           2250 | Neil      | Olson     |
+|          3485 |           2187 | Jeff      | Pickett   |
+|          3486 |           2251 | Tammy     | Hellberg  |
+|          3487 |           2252 | Heather   | Smellie   |
+|          3488 |           2253 | Steve     | Kent      |
+|          3489 |           2254 | Tony      | Rodriguez |
+|          3490 |           1507 | Casey     | Cangelosi |
+|          3491 |           2255 | Jeff      | Nielsen   |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=6 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3492 |           2256 | Jaime     | Mckinley  |
+|          3493 |            437 | Jacob     | Sorenson  |
+|          3494 |           2257 | Joyce     | Ashcroft  |
+|          3495 |           2258 | Curtis    | Gillins   |
+|          3496 |           2259 | Kent      | Pyper     |
+|          3497 |            684 | David     | Darrow    |
+|          3500 |           2260 | Shaun     | Marble    |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=7 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3499 |            684 | David     | Darrow    |
+|          3501 |           2218 | Caleb     | Morrison  |
+|          3502 |           2261 | Lawrence  | Atwood    |
+|          3503 |            278 | Rawlinn   | Hodges    |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=8 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3505 |           2262 | Patrick   | Mifflin   |
+|          3506 |            849 | Ryan      | Holladay  |
+|          3507 |            425 | Vaughn    | Heslop    |
+|          3508 |           2098 | Kelsie    | Nielson   |
+|          3509 |           2171 | zane      | dennis    |
+|          3510 |           2263 | Joseph    | Boucher   |
+|          3511 |           2264 | Carmell   | Burns     |
+|          3512 |           1788 | Corey     | White     |
+|          3513 |           2265 | Willy     | Hansen    |
+|          3514 |           2266 | Tucker    | Crosby    |
++---------------+----------------+-----------+-----------+
+
+mysql> select inv_invoiceID,inv_customerID,cus_fname,cus_lname from invoices,customers where (hour(from_unixtime(inv_completedtime))+1)=9 and inv_customerID=cus_customerID;
++---------------+----------------+-----------+-----------+
+| inv_invoiceID | inv_customerID | cus_fname | cus_lname |
++---------------+----------------+-----------+-----------+
+|          3515 |           2267 | Cameron   | Johnson   |
+|          3516 |           1461 | matthew   | young     |
+|          3517 |           2268 | David     | Reimer    |
+|          3518 |           2269 | Rachel    | Curry     |
+|          3519 |           2270 | Ian       | Davis     |
+|          8155 |             56 | Scot      | Stacey    |
++---------------+----------------+-----------+-----------+

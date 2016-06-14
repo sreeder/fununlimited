@@ -1,0 +1,135 @@
+<!--
+/***********************************
+* Fun Unlimited Online style sheet *
+***********************************/
+
+/* start overall layout */
+tr.content_table
+{
+	padding-bottom:5px;
+}
+.header
+{
+	padding-bottom:5px;
+	color:#555555;
+}
+.footer
+{
+	border-top:solid 1px black;
+	border-right:solid 1px black;
+	border-left:solid 1px black;
+	padding-top:5px;
+	padding-bottom:2px;
+	background:#E0E0E0;
+}
+.orange_label
+{
+	color:#CC6600;
+	font-size:20px;
+	letter-spacing:3px;
+	font-style:italic;
+	font-weight:bold;
+}
+div.right
+{
+	width:95%;
+	text-align:right;
+}
+div.left
+{
+	width:95%;
+	text-align:left;
+}
+/* end overall layout */
+
+/* start table formatting */
+td.tbl_label
+{
+	background-color:#F4F4F4;
+	font-weight:bold;
+	height:24px;
+}
+/* end table formatting */
+
+/* start left menu */
+.left_menu
+{
+	margin:5px;
+}
+.left_menu_top
+{
+	height:20px;
+	color:#FFFFFF;
+	font-weight:bold;
+	padding-left:15px;
+	letter-spacing:5px;
+}
+.left_menu_content
+{
+	font-size:12px;
+	border:solid 1px #00386D;
+	padding:3px;
+}
+.left_menu_section
+{
+	font-weight:bold;
+	color:#CC6600;
+	line-height:16px;
+}
+a.left_menu_link
+{
+	text-decoration:none;
+	line-height:16px;
+	width:145px;
+}
+a.left_menu_link:hover
+{
+	text-decoration:underline;
+	font-size:12px;
+}
+/* end left menu */
+
+/* start cart */
+tr.cart_label td
+{
+	font-weight:bold;
+	background-color:#E5E5E5;
+}
+table.cart_totals tr td
+{
+	font-weight:bold;
+	font-size:14px;
+}
+
+tr.line_odd td
+{
+	background-color:#F0F0F0;
+	font-size:12px;
+}
+tr.line_even td
+{
+	background-color:#FFFFFF;
+	font-size:12px;
+}
+/* end cart */
+
+/* start item results */
+tr td.result_title,tr td.cart_title
+{
+	width:100%;
+	white-space:normal;
+}
+table.catalog_browse
+{
+	border-collapse:collapse;
+}
+tr.catalog_browse td
+{
+	border-top:solid 1px #FFFFFF;
+	border-bottom:solid 1px #FFFFFF;
+	padding:0px 5px 0px 5px;
+	cursor:hand;
+}
+/* end item results */
+
+-->

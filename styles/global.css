@@ -1,0 +1,238 @@
+/****************************
+* Fun Unlimited style sheet *
+****************************/
+
+body
+{
+	font-family:Verdana,Helvetica;
+	font-size:12px;
+	color:#000000;
+}
+a
+{
+	color:#1E86DD;
+	text-decoration:none;
+}
+a:hover
+{
+	color:#1E86DD;
+	text-decoration:underline;
+}
+.eight
+{
+	font-family:Verdana,Helvetica;
+	font-size:8px;
+}
+.nine
+{
+	font-family:Verdana,Helvetica;
+	font-size:9px;
+}
+.ten
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+}
+.eleven
+{
+	font-family:Verdana,Helvetica;
+	font-size:11px;
+}
+.normal
+{
+	font-family:Verdana,Helvetica;
+	font-size:12px;
+}
+.thirteen
+{
+	font-family:Verdana,Helvetica;
+	font-size:13px;
+}
+.fourteen
+{
+	font-family:Verdana,Helvetica;
+	font-size:14px;
+}
+.menu
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+	font-weight:bold;
+	line-height:12pt;
+	padding:0px 2px 0px 2px;
+	color:#FFFFFF;
+}
+.bold, table.bold tr td, tr.bold td, td.bold
+{
+	font-weight:bold;
+}
+
+th
+{
+	font-size:14px;
+}
+
+th.lb, td.lb
+{
+	border-left:solid 1px #000;
+}
+
+.pagebottom
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+	color:#777777;
+}
+a.menu
+{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+a.menu:hover
+{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+a.mainmenu
+{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+a.mainmenu:hover
+{
+	color:#FFFFFF;
+	text-decoration:underline;
+}
+a.graylink
+{
+	color:#555555;
+	text-decoration:underline;
+}
+a.graylink:hover
+{
+	color:#555555;
+	text-decoration:none;
+}
+table tr td
+{
+	white-space:nowrap;
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+}
+tr.bold td
+{
+	font-weight:bold;
+}
+input
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+	border:solid 1px #999999;
+	vertical-align:middle;
+}
+input.nb
+{
+	border-width:0px;
+}
+textarea
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+	border:solid 1px #999999;
+}
+.radio
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+}
+.btn
+{
+	cursor:hand;
+	background:url(/images/btnback.jpg);
+	background-color:#EEEEEE;
+	margin-bottom:1px;
+}
+.mtop
+{
+	margin-top:5px;
+}
+.smbtn
+{
+	cursor:hand;
+	background:url(/images/btnback.jpg);
+	font-size:10px;
+	vertical-align:middle;
+	background-color:#EEEEEE;
+}
+select
+{
+	font-family:Verdana,Helvetica;
+	font-size:10px;
+	vertical-align:middle;
+}
+.optbox
+{
+	color:#000000;
+	font-weight:bold;
+	text-decoration:none;
+}
+.optbox:hover
+{
+	text-decoration:none;
+}
+.medgray
+{
+	color:#AAAAAA;
+}
+form
+{
+	display:inline;
+}
+label
+{
+	cursor:hand;
+}
+.bb
+{
+	border:solid 1px black;
+	border-collapse:collapse;
+	padding:3px;
+}
+.note
+{
+	font-size:10px;
+}
+.little_note
+{
+	font-size:9px;
+}
+.note_red
+{
+	color:red;
+	font-size:10px;
+}
+
+/***********
+* PRINTING *
+***********/
+
+/* don't show if not printing (shows when printing) */
+.onlyprint { display:none; }
+
+/* printing styles */
+@media print
+{
+	.noprint   { display:none; } /* don't show when printing */
+	.onlyprint { display:block; } /* show when printing */
+
+	/* make all background colors white */
+	body  { color:#000; background-color:#FFF; }
+	table { color:#000; background-color:#FFF; }
+	th    { color:#000; background-color:#FFF; }
+	tr    { color:#000; background-color:#FFF; }
+	td    { color:#000; background-color:#FFF; }
+	th.lb, td.lb { border-left:solid 1px #000; }
+	span  { color:#000; background-color:#FFF; }
+	div   { color:#000; background-color:#FFF; }
+	p     { color:#000; background-color:#FFF; }
+}

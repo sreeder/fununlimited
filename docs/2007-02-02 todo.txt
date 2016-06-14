@@ -1,0 +1,57 @@
+Bug Fixes:
+[x] 1) When adding multiple items and taking them to an invoice, if a single UPC already exists, items are not completely added to the invoice
+[x] 2) When receiving an order, if the price is over $100, the price is dropped to $100
+[x] 3) Include received items on the item history report
+[x] 4) In the Receive Order section, just scanning the barcode locks up, but picking a platform and scanning works
+[x] 5) Fix sales graphs
+		Repairs not included, so the numbers may be off a little
+		2/9/2007:
+		1,191.80 Without tax
+		1,320.65 With tax
+[x] 6) Showing the wrong employee on the history
+[x] 7) On graph, if split trade (e.g.: $100 trade, $25 cash), it all shows on graph, should only be cash
+
+Reports:
+[ ] 3) Report to show highest rated games (overall and by genre) by system & overall-include title/system/price/qty in stock & #sold n/u/overall.
+[x] 4) Could you do a report that shows the highest trading, buying and selling customers based on selectable age increments (& or by gender)? [04/22/2007]
+[x] 5) Could you do a report that shows the highest trading, buying and selling areas based on zip codes and area codes?
+[ ] 8) Want report contrasting sales with trades, orders and paid outs.
+[ ] 9) Report showing list of busiest to least busiest day/hour/week/month/year
+		!!! What does "busiest" mean?
+[ ] 10) Report on most frequently used item #'s - include search, purchased, trades, sold etc. Table listing each in columns and then a total column.
+		Do rows in descending order of most frequently used to least frequently used.
+
+Combined report with 'Group By' option:
+[x] 1) Report showing highest trading/selling/buying/returns by employee (by month/week/year/forever)
+[x] 2) Report of average cash/sale/trade $ value by system & overall (by day/month/week/year/forever)
+[x] 6) I would like a list (report) ranking the top selling/trading/purchased items- per day/month/week/year.
+		- Same as #7 with different group-by
+[x] 7) I would like a list (report) ranking the top selling/trading/purchased platforms- per day/month/week/year.
+		- Same as #6 with different group-by
+[x] - Report on sales, based on platform/years/etc
+[x] - Basic report showing sales/returns/credit/cash by platform
+   [x] - Gross sales (all sales), net sales (gross - returns/credit/cash)
+
+New Features:
+[ ] 1) Website that allows the selling of your store's inventory.
+[x] 2) Add invoice options to quick item add screen; carry through to the invoice screen
+
+[03/29/2007]
+[x] - Top 500 [done 04/07/2007]
+   [x] - Show 1000 [done 04/07/2007]
+   [x] - Fix showing previous years (OPEN 2006 AND ARCHIVE THE YEAR!) [done 04/07/2007]
+[x] - Different images for box/no box [done 04/22/2007]
+[x] - Customer info, "In Store" [done 04/07/2007]
+   [x] - Sales = cash/credit/check, not including trade [done 04/07/2007]
+   [x] - Break out Trades cash, trades credit [done 04/07/2007]
+
+
+[06/04/2007]
+[x] Price list - show all games even if $0.00 (option on criteria page)
+[x] Customer does part cash, part trade - shows as negative sale on graph
+	!!! Need Scott to check
+[x] Wishlist - type in "mario world" (AKA: pick an item), show who wants it
+[ ] Receive orders - won't save UPC changes (I think that's what you said...)
+	!!! YES it does - need to see...
+[ ] Best selling list - also include 0 copies (option on criteria page)
+	!!! What is this?
