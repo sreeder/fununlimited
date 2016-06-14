@@ -80,7 +80,7 @@ if (getenv('COMPUTERNAME') == 'SPIRO')
 $url = strtolower($_SERVER['PHP_SELF']);
 $root = '';
 if (substr($url,0,1) == '/') { $url = substr($url,1); }
-$root_num = substr_count($url,'/') - 1;
+$root_num = substr_count($url,'/');# - 1;
 for ($i=1; $i<=$root_num; $i++) { $root .= '../'; }
 
 $_SESSION['root'] = $root;
