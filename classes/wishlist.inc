@@ -1057,7 +1057,7 @@ class wishlist
 	* @param array $items array of items (array must have 'itm_title' and 'pla_name' keys!)
 	* @param integer $locale INSTORE/ONLINE (to determine which action to show the customer) [optional, default INSTORE]
 	*/
-	function email_body($items,$locale=INSTORE)
+	function email_body($items,$locale="INSTORE")
 	{
 		$words = (count($items)!=1?'items from your wishlist are':'item from your wishlist is');
 		$words2 = (count($items)!=1?'these items':'this item');
@@ -1097,7 +1097,7 @@ This email does not guarantee that you will receive this item, nor does it guara
 		$body = str_replace('{items}',implode("\n",$body_items).$either_note,$body);
 
 		// generate the instructions
-		if ($locale == INSTORE)
+		if ($locale == "INSTORE")
 		{
 			$instructions = "If you would like to reserve a copy of $words2, please call us. Otherwise, come in to the store as soon as possible!";
 			$instructions .= "\n\n{$_SESSION['store_info']['sto_name']}";
@@ -1130,7 +1130,7 @@ This email does not guarantee that you will receive this item, nor does it guara
 				$this->info = $arr;
 				$this->email = array(
 					'subject'=>'Wishlist Items Now in Stock',
-					'body'=>$this->email_body($arr['items'],INSTORE)
+					'body'=>$this->email_body($arr['items'],"INSTORE")
 				);
 				$this->send_email();
 			}

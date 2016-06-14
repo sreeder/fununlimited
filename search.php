@@ -4,7 +4,7 @@ include('include/include.inc');
 if (getG('last') && isset($_SESSION['search_last']))
 {
 	$_GET = $_SESSION['search_last'];
-	$_GET['prev'] = True;
+	$_GET['prev'] = YES;
 }
 
 $act = getGP('act');
@@ -38,7 +38,7 @@ elseif ($act == 'search')
 
 	$its = new item_search($pg);
 	$its->setAction('search.php');
-	$its->setOnline(True);
+	$its->setOnline(YES);
 	$its->pull_post();
 	$criteria = $its->getCriteria();
 
@@ -102,16 +102,16 @@ elseif ($act == 'search')
 		$filter_results = array(); // filtered results
 		while (list($a,$arr) = each($results))
 		{
-			$fitsall = True;
+			$fitsall = YES;
 
 			while (list($k,$v) = each($narrow))
 			{
 				if (strlen($v))
 				{
-					if ($k == 'platform' && $arr['itm_platformID'] != $v) { $fitsall = False; }
+					if ($k == 'platform' && $arr['itm_platformID'] != $v) { $fitsall = NO; }
 					elseif ($k == 'startswith' && (($v == '#' && (ord(strtoupper(substr($arr['itm_title'],0,1))) >= 65 && ord(strtoupper(substr($arr['itm_title'],0,1))) <= 90)) || ($v != '#' && ord(strtoupper(substr($arr['itm_title'],0,1))) != ord($v)))) { $fitsall = NO; break; }
-					elseif ($k == 'company' && $arr['itm_company1ID'] != $v && $arr['itm_company2ID'] != $v) { $fitsall = False; break; }
-					elseif ($k == 'type' && $arr['typ_typeID'] != $v) { $fitsall = False; break; }
+					elseif ($k == 'company' && $arr['itm_company1ID'] != $v && $arr['itm_company2ID'] != $v) { $fitsall = NO; break; }
+					elseif ($k == 'type' && $arr['typ_typeID'] != $v) { $fitsall = NO; break; }
 				}
 			}
 			reset($narrow);
@@ -135,8 +135,8 @@ elseif ($act == 'search')
 			// output the platform name
 			$its->pg->pageHead('Browse Catalog by Platform');
 			$pla = new platforms($its->pg,$_SESSION['catalog_platformID']);
-			$pla->show_platform(True,'catalog.php');
-			$oncatalog = True;
+			$pla->show_platform(YES,'catalog.php');
+			$oncatalog = YES;
 		}
 
 		// if the number of results equals $its->max_results and no narrow-by has been chosen, alert the user

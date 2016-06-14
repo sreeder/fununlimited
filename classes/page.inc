@@ -106,9 +106,9 @@ class page
 			'menu-link-hover'       => '#FFFFFF' // menu link color (hover)
 		);
 		$this->onload = array();
-		$this->setFull(True);
-		$this->setCenter(True);
-		$this->setShowBrowse(True);
+		$this->setFull(YES);
+		$this->setCenter(YES);
+		$this->setShowBrowse(YES);
 
 		// make sure a shopping cart exists
 		$cart = new cart($this);
@@ -119,7 +119,7 @@ class page
 		// if it's 2am-2:30am, show the maintenance message
 		if (PRODUCTION && date('G') == 2)
 		{
-			$this->setShowBrowse(False);
+			$this->setShowBrowse(NO);
 			$this->setTitle('Daily Maintenance');
 			$this->head("We're Sorry!");
 			?>
@@ -194,7 +194,7 @@ class page
 	* @param string $pagehead Page header [optional, default '']
 	* @param integer $posmenu Output the point-of-sale menu? [optional, default NO]
 	*/
-	function head($pagehead='',$posmenu=False)
+	function head($pagehead='',$posmenu=NO)
 	{
 		$title = $this->_getTitle();
 		$full = $this->_getFull();
@@ -680,7 +680,7 @@ class page
 			die();
 		}
 
-		$this->setFull(False);
+		$this->setFull(NO);
 		$this->setTitle($text);
 
 		$this->head();
@@ -704,7 +704,7 @@ class page
 	* @param integer $sundays count Sundays? [optional, default YES]
 	* @return integer
 	*/
-	function daysBetween($start,$end,$sundays=True)
+	function daysBetween($start,$end,$sundays=YES)
 	{
 		$start = strtotime(date('m/d/Y',$start)); // midnight
 		$end = strtotime(date('m/d/Y',$end)); // midnight

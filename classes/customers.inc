@@ -974,13 +974,13 @@ class customers extends customer_notes
 			$this->info['cellphone'] = $val->strip(@$this->info['cellphone']);
 			if ($online)
 			{
-				$this->info['locale'] = ONLINE;
+				$this->info['locale'] = "ONLINE";
 				unset($this->info['pass_verify']);
 				unset($this->info['from_edit']);
 			}
 			else
 			{
-				$this->info['locale'] = INSTORE;
+				$this->info['locale'] = "INSTORE";
 			}
 
 			$vals = array();
@@ -1009,12 +1009,12 @@ class customers extends customer_notes
 				if (!$this->customerID) { $return = mysql_insert_id(); }
 				else { $return = $this->customerID; }
 
-				$this->status[0] = ADDED;
+				$this->status[0] = "ADDED";
 				return $return;
 			}
 			else
 			{
-				$this->status[0] = DUPLICATE;
+				$this->status[0] = "DUPLICATE";
 				return -1;
 			}
 		}
@@ -1037,7 +1037,7 @@ class customers extends customer_notes
 
 			$_SESSION['customerID'] = 0;
 
-			$this->status[0] = DELETED;
+			$this->status[0] = "DELETED";
 		}
 	}
 
@@ -1057,7 +1057,7 @@ class customers extends customer_notes
 			mysql_query($sql,$db);
 			$this->error->mysql(__FILE__,__LINE__);
 
-			$this->status[0] = DELETED;
+			$this->status[0] = "DELETED";
 		}
 	}
 

@@ -39,7 +39,7 @@ class login
 	* Initializes variables
 	* @param integer $locale
 	*/
-	function login($locale=INSTORE)
+	function login($locale="INSTORE")
 	{
 		$this->pg =& $GLOBALS['pg'];
 		$this->_setLocale($locale);
@@ -70,7 +70,7 @@ class login
 	{
 		$locale = $this->_getLocale();
 
-		if ($locale == INSTORE)
+		if ($locale == "INSTORE")
 		{
 			// administration login
 			if ($return == '/index.php') { $return = ''; }
@@ -187,7 +187,7 @@ class login
 		global $db;
 
 		$locale = $this->_getLocale();
-		if ($locale == INSTORE)
+		if ($locale == "INSTORE")
 		{
 			$sql = "SELECT * FROM users WHERE use_storeID=$storeID AND use_user='$user' AND use_pass=ENCODE('$pass','".ENCODEKEY."')";
 		}
@@ -206,7 +206,7 @@ class login
 			$row = mysql_fetch_assoc($result);
 			$this->userinfo = $row;
 
-			if ($locale == INSTORE)
+			if ($locale == "INSTORE")
 			{
 				$_SESSION['store_userinfo'] = $row;
 

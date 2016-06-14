@@ -47,10 +47,10 @@ class invoice_search extends invoice_payment
 			<td bgcolor="<?php echo $this->pg->color('table-label');?>"><b>Locale:</b></td>
 			<td bgcolor="<?php echo $this->pg->color('table-cell');?>">
 				<?php
-				if (!isset($this->criteria['locale'])) { $this->criteria['locale'] = BOTH; }
-				$c1 = (@$this->criteria['locale']==INSTORE?' checked="checked"':'');
-				$c2 = (@$this->criteria['locale']==ONLINE?' checked="checked"':'');
-				$c3 = (@$this->criteria['locale']==BOTH?' checked="checked"':'');
+				if (!isset($this->criteria['locale'])) { $this->criteria['locale'] = "BOTH"; }
+				$c1 = (@$this->criteria['locale']=="INSTORE"?' checked="checked"':'');
+				$c2 = (@$this->criteria['locale']=="ONLINE"?' checked="checked"':'');
+				$c3 = (@$this->criteria['locale']=="BOTH"?' checked="checked"':'');
 				?>
 				<input type="radio" name="criteria[locale]" id="li" value="<?php echo INSTORE;?>" style="border-width:0;vertical-align:middle"<?php echo $c1;?>> <label style="cursor:hand" for="li">In-Store</label>
 				<input type="radio" name="criteria[locale]" id="lo" value="<?php echo ONLINE;?>" style="border-width:0;vertical-align:middle"<?php echo $c2;?>> <label style="cursor:hand" for="lo">Online</label>
@@ -61,7 +61,7 @@ class invoice_search extends invoice_payment
 			<td bgcolor="<?php echo $this->pg->color('table-label');?>"><b>Completed:</b></td>
 			<td bgcolor="<?php echo $this->pg->color('table-cell');?>">
 				<?php
-				if (!isset($this->criteria['completed'])) { $this->criteria['completed'] = BOTH; }
+				if (!isset($this->criteria['completed'])) { $this->criteria['completed'] = "BOTH"; }
 				$c1 = (@$this->criteria['completed']==YES?' checked="checked"':'');
 				$c2 = (@$this->criteria['completed']==NO?' checked="checked"':'');
 				$c3 = (@$this->criteria['completed']==BOTH?' checked="checked"':'');
@@ -104,8 +104,8 @@ class invoice_search extends invoice_payment
 		global $db;
 
 		$_SESSION['cust_invoice_criteria'] = $this->criteria;
-		if (!isset($this->criteria['locale'])) { $this->criteria['locale'] = BOTH; }
-		if (!isset($this->criteria['completed'])) { $this->criteria['completed'] = YES; }
+		if (!isset($this->criteria['locale'])) { $this->criteria['locale'] = "BOTH"; }
+		if (!isset($this->criteria['completed'])) { $this->criteria['completed'] = "YES"; }
 
 		$from = array('invoices','customers');
 		$where = array();
@@ -165,7 +165,7 @@ class invoice_search extends invoice_payment
 			// output the results
 
 			$empl = new employees($this->pg);
-			$empl->get_employees(BOTH);
+			$empl->get_employees("BOTH");
 
 			$invoiceID = @$_SESSION['cust_invoiceID'];
 			if (!strlen($invoiceID)) { $invoiceID = 0; }

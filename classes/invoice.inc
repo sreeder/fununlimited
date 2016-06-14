@@ -81,11 +81,11 @@ class invoice extends invoice_view
 	* Generate a new invoice (create the database entry and set the needed session variables)
 	* @param integer $locale Invoice locale (INSTORE/ONLINE)
 	*/
-	function create_new($locale=INSTORE)
+	function create_new($locale="INSTORE")
 	{
 		global $db;
 
-		if ($locale == INSTORE)
+		if ($locale == "INSTORE")
 		{
 			$storeID = $_SESSION['storeID'];
 			$_SESSION['close_after_complete'] = YES;

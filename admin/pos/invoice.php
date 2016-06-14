@@ -88,7 +88,7 @@ elseif ($act == 'dosearch')
 	{
 		// QUICK CAN NO LONGER HAPPEN - SALES AND TRADES ARE NOT SEPARATE
 		if ($_GET['quick'] == "sales") { $type = SALE; } else { $type = TRADE; }
-		$criteria = array('completed'=>YES,'type'=>$type,'locale'=>INSTORE);
+		$criteria = array('completed'=>YES,'type'=>$type,'locale'=>"INSTORE");
 	}
 
 	if (isset($criteria)) { $inv->criteria = $criteria; }
