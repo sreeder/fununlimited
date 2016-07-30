@@ -960,7 +960,11 @@ class items
 			$vals = array();
 			while (list($a,$f) = each($toitems))
 			{
-				$vals[] = "itm_$f='" . mysql_real_escape_string(stripslashes(stripslashes(@$this->info[$f]))) . "'";
+				//added by Stephanie R 7/30/16
+				
+				$testval = mysql_real_escape_string(stripslashes(stripslashes(@$this->info[$f])));
+				$newval= !empty($testval)? "'$testval'" : "NULL";
+				$vals[] = "itm_$f= $newval";
 			}
 			$sql .= implode(",",$vals);
 

@@ -99,6 +99,7 @@ class prices
 		// subtract a penny from even dollar amounts (IE: $15.00 becomes $14.99)
 		$new = $this->fix_price(sprintf('%0.2f',$new));
 		$used = $this->fix_price(sprintf('%0.2f',$used));
+		echo "used: " . $used;
 
 		// see if the item exists in the 'prices' table; if so, pull the item's pricing
 		$exists = NO;
@@ -144,6 +145,7 @@ class prices
 		if ($storeID == -1) { $storeID = $_SESSION['storeID']; }
 
 		$sql = "INSERT INTO price_changes VALUES ($itemID,$storeID,$newused,$from_price,$to_price,'".time()."')";
+		echo $sql;
 		mysql_query($sql,$db);
 		$this->error->mysql(__FILE__,__LINE__);
 	}
