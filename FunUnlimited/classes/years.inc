@@ -40,7 +40,9 @@ class years
 		$unknown = array();
 
 		$sql = "SELECT * FROM years WHERE yer_year<=".(date('Y')+1)." ORDER BY yer_year ".($lowfirst==YES?'ASC':'DESC');
+		#echo $sql;
 		$result = mysql_query($sql,$db);
+		#print_r ($result);
 		$this->error->mysql(__FILE__,__LINE__);
 		while ($row = mysql_fetch_assoc($result))
 		{

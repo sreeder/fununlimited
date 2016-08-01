@@ -99,7 +99,7 @@ class prices
 		// subtract a penny from even dollar amounts (IE: $15.00 becomes $14.99)
 		$new = $this->fix_price(sprintf('%0.2f',$new));
 		$used = $this->fix_price(sprintf('%0.2f',$used));
-		echo "used: " . $used;
+		//echo "used: " . $used;
 
 		// see if the item exists in the 'prices' table; if so, pull the item's pricing
 		$exists = NO;
@@ -126,8 +126,11 @@ class prices
 
 		if ($return_changed) { return mysql_affected_rows(); }
 
+
+		/*TODO stephanie R 8/1/16	always setting used to -1 on creation
 		if ($new != $old_prices['prc_new']) { $this->store_price_change($itemID,ITEM_NEW,$old_prices['prc_new'],$new); }
 		if ($used != $old_prices['prc_used']) { $this->store_price_change($itemID,ITEM_USED,$old_prices['prc_used'],$used); }
+		*/
 	}
 
 	/**

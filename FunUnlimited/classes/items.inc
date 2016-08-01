@@ -965,17 +965,21 @@ class items
 				
 				$testval = mysql_real_escape_string(stripslashes(stripslashes(@$this->info[$f])));
 				$newval= !empty($testval)? "'$testval'" : "NULL";
-				$vals[] = "itm_$f= $newval";
+				//$vals[] = "itm_$f= $newval";
+				if ($newval != "NULL"){$vals[] = "itm_$f= $newval";}
+
+
 			}
 			$sql .= implode(",",$vals);
 
 			if ($this->itemID) { $sql .= " WHERE itm_itemID=$this->itemID"; }
-
-			print_r($a);
+			echo $sql;
+			/*print_r($a);
 			print_r($toitems);
 			print_r($vals);
 			echo $sql;
-			echo $db;
+			echo $db;*/
+			
 			mysql_query($sql,$db);
 
 			$isdupe = $this->error->mysql(__FILE__,__LINE__,YES);
