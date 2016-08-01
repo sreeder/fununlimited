@@ -8,6 +8,7 @@
 * @package Fun Unlimited
 */
 
+
 /************************
  ** INITIALIZE SESSION **
  ***********************/
@@ -17,6 +18,8 @@
 
 
 /*
+
+
 
 // ----------------------------------------------------------------------------------------------------
 // - Display Errors
@@ -77,10 +80,9 @@ function ErrorHandler($type, $message, $file, $line)
 
 $old_error_handler = set_error_handler("ErrorHandler");
 
-
-
-
 */
+
+
 date_default_timezone_set('America/Los_Angeles');
 
 

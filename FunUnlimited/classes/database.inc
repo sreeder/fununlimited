@@ -7,7 +7,7 @@
 * @version 1.0
 * @package Fun Unlimited
 */
-
+#phpinfo();
 if (!defined('PRODUCTION'))
 {
 	// this generally happens if you only include this file
@@ -23,7 +23,11 @@ if (!defined('PRODUCTION'))
 
 $host = (PRODUCTION ? '206.130.100.155' : 'localhost');
 $host = 'localhost';
-
+// echo $host;
 $db = @mysql_connect($host,'fununlimited','fununlimited');
+
+// $dv = @mysqli_connect($host, 'fununlimited', 'fununlimited');
 if (!$db) { die('Unable to connect to the database: ' . mysql_error()); }
 mysql_query('USE fununlimited',$db);
+
+
