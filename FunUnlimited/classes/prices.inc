@@ -148,7 +148,7 @@ class prices
 		if ($storeID == -1) { $storeID = $_SESSION['storeID']; }
 
 		$sql = "INSERT INTO price_changes VALUES ($itemID,$storeID,$newused,$from_price,$to_price,'".time()."')";
-		echo $sql;
+		//echo $sql;
 		mysql_query($sql,$db);
 		$this->error->mysql(__FILE__,__LINE__);
 	}

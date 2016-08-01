@@ -973,7 +973,7 @@ class items
 			$sql .= implode(",",$vals);
 
 			if ($this->itemID) { $sql .= " WHERE itm_itemID=$this->itemID"; }
-			echo $sql;
+			
 			/*print_r($a);
 			print_r($toitems);
 			print_r($vals);
