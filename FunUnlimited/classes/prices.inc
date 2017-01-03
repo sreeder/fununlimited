@@ -100,6 +100,7 @@ class prices
 		$new = $this->fix_price(sprintf('%0.2f',$new));
 		$used = $this->fix_price(sprintf('%0.2f',$used));
 
+
 		// see if the item exists in the 'prices' table; if so, pull the item's pricing
 		$exists = NO;
 		$old_prices = array();
@@ -126,9 +127,17 @@ class prices
 		$this->error->mysql(__FILE__,__LINE__);
 
 		if ($return_changed) { return mysql_affected_rows(); }
-		//TODO Stephanie Reeder uncomment and fix the following 2 commands. old_prices is always a -1
-		// if ($new != $old_prices['prc_new']) { $this->store_price_change($itemID,ITEM_NEW,$old_prices['prc_new'],$new); }
-		// if ($used != $old_prices['prc_used']) { $this->store_price_change($itemID,ITEM_USED,$old_prices['prc_used'],$used); }
+
+
+
+
+		/*TODO stephanie R 8/1/16	always setting used to -1 on creation
+		 uncomment and fix the following 2 commands. old_prices is always a -1
+
+		if ($new != $old_prices['prc_new']) { $this->store_price_change($itemID,ITEM_NEW,$old_prices['prc_new'],$new); }
+		if ($used != $old_prices['prc_used']) { $this->store_price_change($itemID,ITEM_USED,$old_prices['prc_used'],$used); }
+		*/
+
 	}
 
 	/**
@@ -146,7 +155,7 @@ class prices
 		if ($storeID == -1) { $storeID = $_SESSION['storeID']; }
 
 		$sql = "INSERT INTO price_changes VALUES ($itemID,$storeID,$newused,$from_price,$to_price,'".time()."')";
-		echo $sql;
+		//echo $sql;
 		mysql_query($sql,$db);
 		$this->error->mysql(__FILE__,__LINE__);
 	}

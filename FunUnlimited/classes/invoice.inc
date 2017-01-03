@@ -177,6 +177,7 @@ class invoice extends invoice_view
 
 			// pull in the information for the session variable
 			$sql = "SELECT * FROM invoices WHERE inv_invoiceID=$invoiceID";
+			//echo "in invoice ". $sql;
 			$result = mysql_query($sql, $db);
 			$this->error->mysql(__FILE__,__LINE__);
 			$row = mysql_fetch_assoc($result);
@@ -190,10 +191,12 @@ class invoice extends invoice_view
 			// pull in the invoice items
 			$_SESSION['cust_items'] = array();
 			$sql = "SELECT * FROM invoice_items WHERE ini_invoiceID=$invoiceID ORDER BY ini_timeadded DESC"; // ORDER BY ini_timeadded
+			//echo "geting items: " . $sql;
 			$result = mysql_query($sql, $db);
 			$this->error->mysql(__FILE__,__LINE__);
 			while ($row = mysql_fetch_assoc($result))
 			{
+
 				foreach ($row as $k => $v) { $row[$k] = stripslashes($v); }
 				$row['image'] = array('FULL'=>'', 'THUMB'=>'');
 				$_SESSION['cust_items'][] = $row;

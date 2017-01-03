@@ -144,6 +144,8 @@ elseif ($act == 'selplatform')
 			var numitems = <?php echo $numitems;?>;
 
 			<?php
+
+			//TODO Stephanie R 8/1/16 why are type and year dropdown not populationg
 			// populate the type variables
 			while (list($a, $arr) = each($pla->values))
 			{

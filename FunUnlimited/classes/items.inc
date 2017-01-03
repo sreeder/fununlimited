@@ -107,6 +107,7 @@ class items
 		);
 		while ($row = mysql_fetch_assoc($result))
 		{
+			print_r($row);
 			$imageIDs[] = $row['itm_box_imgID'];
 			$imageIDs[] = $row['itm_nobox_imgID'];
 			$row = array_merge($row,$merge);
@@ -964,13 +965,23 @@ class items
 				
 				$testval = mysql_real_escape_string(stripslashes(stripslashes(@$this->info[$f])));
 				$newval= !empty($testval)? "'$testval'" : "NULL";
-				$vals[] = "itm_$f= $newval";
+				//$vals[] = "itm_$f= $newval";
+				if ($newval != "NULL"){$vals[] = "itm_$f= $newval";}
+
+
 			}
 			$sql .= implode(",",$vals);
 
 			if ($this->itemID) { $sql .= " WHERE itm_itemID=$this->itemID"; }
-
+			
+			/*print_r($a);
+			print_r($toitems);
+			print_r($vals);
+			echo $sql;
+			echo $db;*/
+			
 			mysql_query($sql,$db);
+
 			$isdupe = $this->error->mysql(__FILE__,__LINE__,YES);
 
 			$itemID = ($this->itemID ? $this->itemID : mysql_insert_id());

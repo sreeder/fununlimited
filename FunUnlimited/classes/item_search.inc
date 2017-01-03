@@ -498,6 +498,8 @@ class item_search extends item_search_results
 			else { $sql .= " LIMIT $this->max_results"; }
 
 			// call the user-defined function $sqlfunc if needed
+
+			#echo $sql;
 			if (strlen($sqlfunc) && function_exists($sqlfunc)) { $sql = call_user_func($sqlfunc,$sql); }
 
 			$this->timer->stopTimer("search_$type-build_query");
