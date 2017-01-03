@@ -99,7 +99,6 @@ class prices
 		// subtract a penny from even dollar amounts (IE: $15.00 becomes $14.99)
 		$new = $this->fix_price(sprintf('%0.2f',$new));
 		$used = $this->fix_price(sprintf('%0.2f',$used));
-		echo "used: " . $used;
 
 		// see if the item exists in the 'prices' table; if so, pull the item's pricing
 		$exists = NO;
@@ -119,15 +118,17 @@ class prices
 		if (!$exists) { $vals[] = "prc_itemID=$itemID"; }
 		if ($new != -1) { $vals[] = "prc_new=$new"; }
 		if ($used != -1) { $vals[] = "prc_used=$used"; }
-
+		echo "prc_used " .$vals['prc_used'];
+		echo "used: " . $used;
 		$sql = ($exists?'UPDATE':'INSERT INTO').' prices SET '.implode(',',$vals).($exists?" WHERE prc_itemID=$itemID":'');
+		echo $sql;
 		mysql_query($sql,$db);
 		$this->error->mysql(__FILE__,__LINE__);
 
 		if ($return_changed) { return mysql_affected_rows(); }
-
-		if ($new != $old_prices['prc_new']) { $this->store_price_change($itemID,ITEM_NEW,$old_prices['prc_new'],$new); }
-		if ($used != $old_prices['prc_used']) { $this->store_price_change($itemID,ITEM_USED,$old_prices['prc_used'],$used); }
+		//TODO Stephanie Reeder uncomment and fix the following 2 commands. old_prices is always a -1
+		// if ($new != $old_prices['prc_new']) { $this->store_price_change($itemID,ITEM_NEW,$old_prices['prc_new'],$new); }
+		// if ($used != $old_prices['prc_used']) { $this->store_price_change($itemID,ITEM_USED,$old_prices['prc_used'],$used); }
 	}
 
 	/**

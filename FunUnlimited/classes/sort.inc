@@ -41,7 +41,7 @@ class sort
 			}
 
 			$sort_command .= '$sorted_array));';
-
+            #echo $sort_command;
 			eval($sort_command);
 			return $sorted_array;
 		}

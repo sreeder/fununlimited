@@ -309,6 +309,8 @@ class sales_figures
 				GROUP BY ini_invoiceID
 				ORDER BY t_month
 			";
+
+            #echo $sql;
 			$result = mysql_query($sql,$db);
 			$this->error->mysql(__FILE__,__LINE__);
 			while ($row = mysql_fetch_assoc($result))

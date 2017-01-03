@@ -40,7 +40,7 @@ else
 }
 $th_label = ucwords($groupby);
 
-$empl = new employees($this->pg);
+$empl = new employees($pg);
 $empl->get_employees(BOTH);
 $employees = $empl->employees;
 unset($empl);

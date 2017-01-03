@@ -992,7 +992,12 @@ class customers extends customer_notes
 				}
 				else
 				{
-					$vals[] = "cus_{$key}='" . mysql_real_escape_string($val) . "'";
+
+					$testval = mysql_real_escape_string($val);
+					$newval= !empty($testval)? "'$testval'" : "NULL";
+					$vals[] = "cus_{$key}= $newval";
+
+					//$vals[] = "cus_{$key}='" . mysql_real_escape_string($val) . "'";
 				}
 			}
 			if (!$this->customerID) { $vals[] = "cus_timeadded='" . time() . "'"; }

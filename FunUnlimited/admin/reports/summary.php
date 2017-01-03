@@ -26,7 +26,7 @@ $date_low = mktime(0, 0, 0, date('m'), 1, date('Y'));
 $date_high = time();
 
 // temporary
-$date_low = strtotime('6/1/2007');
+$date_low = strtotime('1/1/2014');
 $date_high = strtotime($max);
 
 ?>
